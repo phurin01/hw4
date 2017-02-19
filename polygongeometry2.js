@@ -13,6 +13,7 @@ var windowScale;
 
 function PolygonGeometry(sides, location) {
 	var geo = new THREE.Geometry();
+
 	
 	// generate vertices
 	for ( var pt = 0 ; pt < sides; pt++ )
@@ -20,8 +21,8 @@ function PolygonGeometry(sides, location) {
 		// Add 90 degrees so we start at +Y axis, rotate counterclockwise around
 		var angle = (Math.PI/2) + (pt / sides) * 2 * Math.PI;
 
-		var x = Math.cos( angle );
-		var y = Math.sin( angle );
+		var x = Math.cos( angle )+location.x;
+		var y = Math.sin( angle )+location.y;
 
 		// Save the vertex location
 		geo.vertices.push( new THREE.Vector3( x, y, 0.0 ) );
@@ -89,8 +90,8 @@ function render() {
 try {
   init();
   showGrids();
-  var geo = PolygonGeometry(6, new THREE.Vector3( 3, 4, 0 ));
-  var material = new THREE.MeshBasicMaterial( { color: 0xff0000, side: THREE.FrontSide } );
+  var geo = PolygonGeometry(6, new THREE.Vector3( 2, 2, 0 ));
+  var material = new THREE.MeshBasicMaterial( { color: 0x8e80cc, side: THREE.FrontSide } );
   var mesh = new THREE.Mesh( geo, material );
   scene.add( mesh );
   addToDOM();
